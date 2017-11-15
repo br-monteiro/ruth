@@ -1,0 +1,25 @@
+{
+    "name": "phbsis/ruth",
+    "description": "A simple route system in PHP",
+    "homepage": "https://github.com/br-monteiro/ruth",
+    "type": "library",
+    "license": "GNU",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Edson B. S. Monteiro",
+            "email": "bruno.monteirodg@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ruth\\": "src/"
+        }
+    }
+}
