@@ -58,7 +58,8 @@ class Route
         $path = strtolower($path);
         // validate path
         if (strpos($path, '/') != 0) {
-            throw new \Exception('The route ["' . $path . '"] path is not valid');
+            throw new \Exception('The route ["' . $path . '"] path is not valid.'
+                . ' Routes should start with slash.');
         }
 
         // remove last '/' from path
