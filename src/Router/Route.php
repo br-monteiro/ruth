@@ -55,6 +55,7 @@ class Route
 
     public static function normalizeRoute(string $path): string
     {
+        $path = strtolower($path);
         // validate path
         if (strpos($path, '/') != 0) {
             throw new \Exception('The route ["' . $path . '"] path is not valid');
@@ -65,8 +66,7 @@ class Route
             $path = rtrim($path, '/');
         }
 
-        $path = strtolower($path);
-        $path = str_replace('//', '/', $path);
+        $path = self::removeDuplicatedSlashes($path);
 
         return $path;
     }
@@ -74,6 +74,17 @@ class Route
     public static function getRouteMap(): array
     {
         return self::$routeMap;
+    }
+
+    private static function removeDuplicatedSlashes(string $path): string
+    {
+
+        if (preg_match('/\/\//', $path)) {
+            $path = str_replace('//', '/', $path);
+            return self::removeDuplicatedSlashes($path);
+        }
+
+        return $path;
     }
 
     private static function registerRoute(string $type, $path, array $options)
