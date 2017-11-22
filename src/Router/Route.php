@@ -56,8 +56,14 @@ class Route
             if (!key_exists($lengthRoute, self::$routeMap[$method]) || !key_exists($route, self::$routeMap[$method][$lengthRoute])) {
                 throw new \Exception("The route [{$route}] is not found.");
             }
-            // Hasta la vista, route! =)
-            unset(self::$routeMap[$method][$lengthRoute][$route]);
+
+            if (count(self::$routeMap[$method][$lengthRoute]) == 1) {
+                // Hasta la vista, route! =)
+                unset(self::$routeMap[$method][$lengthRoute]);
+            } else {
+                // Hasta la vista, route! =)
+                unset(self::$routeMap[$method][$lengthRoute][$route]);
+            }
         };
 
         foreach ($options as $option) {
