@@ -47,6 +47,50 @@ class Route
         }
     }
 
+    public static function removeRoute(array $options)
+    {
+        $remove = function($method, $route) {
+            $route = self::normalizeRoute($route);
+            $lengthRoute = self::lengthRoute($route);
+
+            if (!key_exists($lengthRoute, self::$routeMap[$method]) || !key_exists($route, self::$routeMap[$method][$lengthRoute])) {
+                throw new \Exception("The route [{$route}] is not found.");
+            }
+            // Hasta la vista, route! =)
+            unset(self::$routeMap[$method][$lengthRoute][$route]);
+        };
+
+        foreach ($options as $option) {
+
+            if (!is_array($option)) {
+                throw new \Exception("It is necessary to fill the array of "
+                . "options with method and route [method => route | [routes]]");
+            }
+
+            foreach ($option as $method => $route) {
+                $method = strtoupper($method);
+
+                if (!key_exists($method, self::$routeMap)) {
+                    throw new \Exception("The method [{$method}] is not supported.");
+                }
+
+                if (is_array($route)) {
+                    foreach ($route as $value) {
+                        $remove($method, $value);
+                    }
+                    return;
+                }
+
+                $remove($method, $route);
+            }
+        }
+    }
+
+    public static function cleanRouteMap()
+    {
+        self::$routeMap = [];
+    }
+
     public static function lengthRoute(string $path): int
     {
         $path = self::normalizeRoute($path);
@@ -59,7 +103,7 @@ class Route
         // validate path
         if (strpos($path, '/') != 0) {
             throw new \Exception('The route ["' . $path . '"] path is not valid.'
-                . ' Routes should start with slash.');
+            . ' Routes should start with slash.');
         }
 
         // remove last '/' from path
