@@ -67,7 +67,7 @@ class RouteTest extends PHPUnit
 
         $outputValue = Route::getRouteMap();
 
-        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be a identity array');
+        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
     }
 
     public function testSetPatternsParamsWithOneOrMoreRoutes()
@@ -117,6 +117,6 @@ class RouteTest extends PHPUnit
 
         $outputValue = Route::getRouteMap();
 
-        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be a identity array');
+        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
     }
 }
