@@ -387,4 +387,16 @@ class RouteTest extends PHPUnit
             "get" => "/test/:id"
         ]);
     }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testThrowExceptionIfTryRemoveAnRouteOfUnknowMethod()
+    {
+        Route::get('/home/:id', []);
+
+        Route::removeRoute([
+            "UNKNOW" => "/test/:id"
+        ]);
+    }
 }
