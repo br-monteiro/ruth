@@ -155,7 +155,7 @@ class RouteTest extends PHPUnit
                             ":id" => "/\d+/"
                         ],
                         "explode" => [
-                            0 => "t",
+                            0 => "",
                             1 => "test",
                             2 => ":id"
                         ]
