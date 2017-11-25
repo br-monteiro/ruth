@@ -181,9 +181,9 @@ class RouteTest extends PHPUnit
                 ':id' => '/\d+/'
             ]
         ]);
-        
+
         Route::removeRoute([
-            ["get" => "/test/:id"]
+            "get" => "/test/:id"
         ]);
 
         $outputExpected = [
