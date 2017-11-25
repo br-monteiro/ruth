@@ -209,4 +209,24 @@ class RouteTest extends PHPUnit
 
         $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
     }
+
+    public function testRemoveAllRouteEvenMethodAndLength()
+    {
+        Route::get([
+            '/home/:id',
+            '/test/:id'
+            ], []);
+
+        Route::removeRoute([
+            "GET" => [
+                "/home/:id",
+                "/test/:id"
+            ]
+        ]);
+
+        $outputValue = Route::getRouteMap();
+        $outputValue = empty($outputValue['GET']);
+
+        $this->assertEquals(true, $outputValue, 'Should be returned an empty array');
+    }
 }
