@@ -149,7 +149,8 @@ class Route
                 $optionsCopy = $options;
                 $alias = gettype($key) == 'string' ? $value : null;
                 $value = gettype($key) == 'string' ? $key : $value;
-                $optionsCopy['patterns'] = self::prepareOptionsPatterns($value, $alias, $options['patterns']);
+                $pattern = isset($options['patterns']) ? self::prepareOptionsPatterns($value, $alias, $options['patterns']) : [];
+                $optionsCopy['patterns'] = $pattern;
                 $funcRegister($type, $value, $optionsCopy);
             }
             // stop execution
