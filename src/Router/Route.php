@@ -66,29 +66,26 @@ class Route
             }
         };
 
-        foreach ($options as $option) {
+        if (!is_array($options)) {
+            throw new \Exception("It is necessary to fill the array of "
+            . "options with method and route [method => <route | [routes]>]");
+        }
 
-            if (!is_array($option)) {
-                throw new \Exception("It is necessary to fill the array of "
-                . "options with method and route [method => route | [routes]]");
+        foreach ($options as $method => $route) {
+            $method = strtoupper($method);
+
+            if (!key_exists($method, self::$routeMap)) {
+                throw new \Exception("The method [{$method}] is not supported.");
             }
 
-            foreach ($option as $method => $route) {
-                $method = strtoupper($method);
-
-                if (!key_exists($method, self::$routeMap)) {
-                    throw new \Exception("The method [{$method}] is not supported.");
+            if (is_array($route)) {
+                foreach ($route as $value) {
+                    $remove($method, $value);
                 }
-
-                if (is_array($route)) {
-                    foreach ($route as $value) {
-                        $remove($method, $value);
-                    }
-                    return;
-                }
-
-                $remove($method, $route);
+                return;
             }
+
+            $remove($method, $route);
         }
     }
 
