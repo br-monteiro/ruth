@@ -243,4 +243,86 @@ class RouteTest extends PHPUnit
 
         $this->assertEquals([], $outputValue, 'Should be returned an empty array');
     }
+
+    public function testRegisterRouterForAllMethodsAllowed()
+    {
+        Route::all('/home/:id', [
+            'run' => 'ControllerTest',
+            'action' => 'testAction',
+            'patterns' => [
+                ':id' => '/\d+/'
+            ]
+        ]);
+
+        $outputExpected = [
+            "GET" => [
+                3 => [
+                    "/home/:id" => [
+                        "run" => "ControllerTest",
+                        "action" => "testAction",
+                        "patterns" => [
+                            ":id" => "/\d+/"
+                        ],
+                        "explode" => [
+                            0 => "",
+                            1 => "home",
+                            2 => ":id"
+                        ]
+                    ]
+                ]
+            ],
+            "POST" => [
+                3 => [
+                    "/home/:id" => [
+                        "run" => "ControllerTest",
+                        "action" => "testAction",
+                        "patterns" => [
+                            ":id" => "/\d+/"
+                        ],
+                        "explode" => [
+                            0 => "",
+                            1 => "home",
+                            2 => ":id"
+                        ]
+                    ]
+                ]
+            ],
+            "PUT" => [
+                3 => [
+                    "/home/:id" => [
+                        "run" => "ControllerTest",
+                        "action" => "testAction",
+                        "patterns" => [
+                            ":id" => "/\d+/"
+                        ],
+                        "explode" => [
+                            0 => "",
+                            1 => "home",
+                            2 => ":id"
+                        ]
+                    ]
+                ]
+            ],
+            "DELETE" => [
+                3 => [
+                    "/home/:id" => [
+                        "run" => "ControllerTest",
+                        "action" => "testAction",
+                        "patterns" => [
+                            ":id" => "/\d+/"
+                        ],
+                        "explode" => [
+                            0 => "",
+                            1 => "home",
+                            2 => ":id"
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $outputValue = Route::getRouteMap();
+
+        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
+    }
 }
