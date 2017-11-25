@@ -375,4 +375,16 @@ class RouteTest extends PHPUnit
 
         $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
     }
+
+    /**
+     * @expectedException \Exception
+     */
+    public function testThrowExceptionIfTryRemoveAnUnknowRoute()
+    {
+        Route::get('/home/:id', []);
+
+        Route::removeRoute([
+            "get" => "/test/:id"
+        ]);
+    }
 }
