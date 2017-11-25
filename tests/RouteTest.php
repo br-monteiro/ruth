@@ -229,4 +229,18 @@ class RouteTest extends PHPUnit
 
         $this->assertEquals(true, $outputValue, 'Should be returned an empty array');
     }
+
+    public function testCleanRouteMap()
+    {
+        Route::get([
+            '/home/:id',
+            '/test/:id'
+            ], []);
+
+        Route::cleanRouteMap();
+
+        $outputValue = Route::getRouteMap();
+
+        $this->assertEquals([], $outputValue, 'Should be returned an empty array');
+    }
 }
