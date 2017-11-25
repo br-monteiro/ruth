@@ -169,7 +169,7 @@ class RouteTest extends PHPUnit
         $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
     }
 
-    public function testReturnArrayWithoutRemovedRoute()
+    public function testReturnArrayWithoutRemovedRoutes()
     {
         Route::get([
             '/home/:id',
@@ -210,7 +210,7 @@ class RouteTest extends PHPUnit
         $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
     }
 
-    public function testRemoveAllRouteEvenMethodAndLength()
+    public function testRemoveAllRoutesEvenMethodAndLength()
     {
         Route::get([
             '/home/:id',
@@ -244,7 +244,7 @@ class RouteTest extends PHPUnit
         $this->assertEquals([], $outputValue, 'Should be returned an empty array');
     }
 
-    public function testRegisterRouterForAllMethodsAllowed()
+    public function testRegisterRoutesForAllMethodsAllowed()
     {
         Route::all('/home/:id', [
             'run' => 'ControllerTest',
@@ -326,7 +326,7 @@ class RouteTest extends PHPUnit
         $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
     }
 
-    public function testRegisterRouterForManyMethodsAllowed()
+    public function testRegisterRoutesForManyMethodsAllowed()
     {
         Route::many(['GET', 'PUT'], '/home/:id', [
             'run' => 'ControllerTest',
