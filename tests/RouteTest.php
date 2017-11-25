@@ -169,7 +169,7 @@ class RouteTest extends PHPUnit
         $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
     }
 
-    public function testReturnArrayWithputRemovedRoute()
+    public function testReturnArrayWithoutRemovedRoute()
     {
         Route::get([
             '/home/:id',
