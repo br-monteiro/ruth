@@ -22,7 +22,7 @@ class RouteTest extends PHPUnit
         Route::normalizeRoute($inputValue);
     }
 
-    public function testRemoveDoubleSalsh()
+    public function testRemoveDoubleSalash()
     {
         $expected = "/home/test/1";
         $inputValue = "//home//test///1";
@@ -30,7 +30,7 @@ class RouteTest extends PHPUnit
         $this->assertEquals($expected, $outputValue, "should remove duplicate slashes");
     }
 
-    public function testRemoveTheLastSalsh()
+    public function testRemoveTheLastSalash()
     {
         $expected = "/home/test/1";
         $inputValue = "//home//test///1/////";
