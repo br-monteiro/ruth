@@ -141,6 +141,7 @@ class Route
             $length = self::lengthRoute($path);
             $path = self::normalizeRoute($path);
             $options['explode'] = explode('/', $path);
+            $options['type'] = $type;
             self::$routeMap[$type][$length][$path] = $options;
         };
 
