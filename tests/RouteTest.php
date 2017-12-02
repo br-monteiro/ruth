@@ -55,6 +55,7 @@ class RouteTest extends PHPUnit
                     "/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "GET",
                         "patterns" => [
                             ":id" => "/\w+/"
                         ],
@@ -69,7 +70,7 @@ class RouteTest extends PHPUnit
 
         $outputValue = Route::getRouteMap();
 
-        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
+        $this->assertEquals($outputExpected, $outputValue, 'Should be an equal array');
     }
 
     public function testSetPatternsParamsWithOneOrMoreRoutes()
@@ -92,6 +93,7 @@ class RouteTest extends PHPUnit
                     "/home/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "GET",
                         "patterns" => [
                             ":id" => "/\d+/"
                         ],
@@ -104,6 +106,7 @@ class RouteTest extends PHPUnit
                     "/test/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "GET",
                         "patterns" => [
                             ":id" => "/\w+/"
                         ],
@@ -119,7 +122,7 @@ class RouteTest extends PHPUnit
 
         $outputValue = Route::getRouteMap();
 
-        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
+        $this->assertEquals($outputExpected, $outputValue, 'Should be an equal array');
     }
 
     public function testSetEqualsPatternsParamsToOneOrMoreRoutesWithEvenParamName()
@@ -141,6 +144,7 @@ class RouteTest extends PHPUnit
                     "/home/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "GET",
                         "patterns" => [
                             ":id" => "/\d+/"
                         ],
@@ -153,6 +157,7 @@ class RouteTest extends PHPUnit
                     "/test/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "GET",
                         "patterns" => [
                             ":id" => "/\d+/"
                         ],
@@ -168,7 +173,7 @@ class RouteTest extends PHPUnit
 
         $outputValue = Route::getRouteMap();
 
-        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
+        $this->assertEquals($outputExpected, $outputValue, 'Should be an equal array');
     }
 
     public function testReturnArrayWithoutRemovedRoutes()
@@ -194,6 +199,7 @@ class RouteTest extends PHPUnit
                     "/home/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "GET",
                         "patterns" => [
                             ":id" => "/\d+/"
                         ],
@@ -209,7 +215,7 @@ class RouteTest extends PHPUnit
 
         $outputValue = Route::getRouteMap();
 
-        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
+        $this->assertEquals($outputExpected, $outputValue, 'Should be an equal array');
     }
 
     public function testRemoveAllRoutesEvenMethodAndLength()
@@ -262,6 +268,7 @@ class RouteTest extends PHPUnit
                     "/home/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "GET",
                         "patterns" => [
                             ":id" => "/\d+/"
                         ],
@@ -278,6 +285,7 @@ class RouteTest extends PHPUnit
                     "/home/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "POST",
                         "patterns" => [
                             ":id" => "/\d+/"
                         ],
@@ -294,6 +302,7 @@ class RouteTest extends PHPUnit
                     "/home/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "PUT",
                         "patterns" => [
                             ":id" => "/\d+/"
                         ],
@@ -310,6 +319,7 @@ class RouteTest extends PHPUnit
                     "/home/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "DELETE",
                         "patterns" => [
                             ":id" => "/\d+/"
                         ],
@@ -325,7 +335,7 @@ class RouteTest extends PHPUnit
 
         $outputValue = Route::getRouteMap();
 
-        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
+        $this->assertEquals($outputExpected, $outputValue, 'Should be an equal array');
     }
 
     public function testRegisterRoutesForManyMethodsAllowed()
@@ -344,6 +354,7 @@ class RouteTest extends PHPUnit
                     "/home/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "GET",
                         "patterns" => [
                             ":id" => "/\d+/"
                         ],
@@ -360,6 +371,7 @@ class RouteTest extends PHPUnit
                     "/home/:id" => [
                         "run" => "ControllerTest",
                         "action" => "testAction",
+                        "type" => "PUT",
                         "patterns" => [
                             ":id" => "/\d+/"
                         ],
@@ -375,7 +387,7 @@ class RouteTest extends PHPUnit
 
         $outputValue = Route::getRouteMap();
 
-        $this->assertEquals(true, ($outputExpected === $outputValue), 'Should be an equal array');
+        $this->assertEquals($outputExpected, $outputValue, 'Should be an equal array');
     }
 
     /**
