@@ -7,6 +7,9 @@ class Route
     private static $allowedMethods = ['GET', 'POST', 'PUT', 'DELETE'];
     private static $routeMap = [];
 
+    /**
+     *
+     */
     public static function get($path, array $options)
     {
         self::registerRoute('GET', $path, $options);
