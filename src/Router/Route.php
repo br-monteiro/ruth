@@ -7,6 +7,12 @@ class Route
     private static $allowedMethods = ['GET', 'POST', 'PUT', 'DELETE'];
     private static $routeMap = [];
 
+    /**
+     * Register the routes to GET HTTP Method
+     *
+     * @param mixed $path Path of route
+     * @param array $options Configuration of route
+     */
     public static function get($path, array $options)
     {
         self::registerRoute('GET', $path, $options);
