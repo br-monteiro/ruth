@@ -10,8 +10,15 @@ if (!$dispatcher->getExecute()->getError()) {
     $controller = $dispatcher->getExecute()->getRun();
     $action = $dispatcher->getExecute()->getAction();
     $params = $dispatcher->getExecute()->getParams();
+    $patterns = $dispatcher->getExecute()->getPatterns();
 
-    $controller = new $controller($params);
+    if (gettype($controller) == "string") {
+        $controller = new $controller($params);
+    } else {
+        $controller->setParams($params);
+        $controller->setPatterns($patterns);
+    }
+
     $controller->$action();
 } else {
     // error 404
