@@ -32,10 +32,10 @@ class Dispatcher
         $currentRoute = null;
 
         if (isset($this->routeMap[$this->method][$length])) {
-            foreach ($this->routeMap[$this->method][$length] as $path => $config) {
+            foreach ($this->routeMap[$this->method][$length] as $config) {
                 $currentRoute = $config;
                 $validUri = $this->validateUri($config);
-                if (!$validUri) {
+                if (gettype($validUri) != "array") {
                     continue;
                 }
                 $config['params'] = $validUri;
