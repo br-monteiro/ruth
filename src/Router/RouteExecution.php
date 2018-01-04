@@ -7,6 +7,7 @@ class RouteExecution
     private $run;
     private $action;
     private $params = [];
+    private $patterns;
     private $error;
     private $rawRouteConfig;
 
@@ -20,6 +21,7 @@ class RouteExecution
         $this->run = $route['run'] ?? null;
         $this->action = $route['action'] ?? null;
         $this->params = $route['params'] ?? null;
+        $this->patterns = $route['patterns'] ?? null;
         $this->error = $route['error'] ?? null;
         $this->rawRouteConfig = $route;
     }
@@ -37,6 +39,11 @@ class RouteExecution
     public function getParams()
     {
         return $this->params;
+    }
+
+    public function getPatterns()
+    {
+        return $this->patterns;
     }
     
     public function getError()
