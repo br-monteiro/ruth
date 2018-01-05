@@ -77,4 +77,11 @@ class DispatcherTest extends PHPUnit
 
         $this->assertEquals(['id' => 123], $routeExecution->getParams(), "It should be return an array with '['id' => 123]' content");
     }
+
+    public function testRetunsOfGetPatternsMethod()
+    {
+        $routeExecution = $this->dispatcher->getExecute();
+
+        $this->assertEquals([':id' => '/\d+/'], $routeExecution->getPatterns(), "It should be return an array with '[':id' => '/\d+/']' content");
+    }
 }
