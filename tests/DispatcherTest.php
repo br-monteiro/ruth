@@ -7,9 +7,10 @@ use Ruth\Router\Dispatcher;
 
 class DispatcherTest extends PHPUnit
 {
+
     protected $dispatcher;
 
-    public function tearDown()
+    public function setUp()
     {
         $request = [
             'REQUEST_METHOD' => 'GET',
@@ -17,8 +18,6 @@ class DispatcherTest extends PHPUnit
         ];
 
         $_SERVER = array_merge($_SERVER, $request);
-
-        Route::cleanRouteMap();
 
         Route::get('/:id', [
             'run' => 'ControllerTest',
@@ -29,6 +28,11 @@ class DispatcherTest extends PHPUnit
         ]);
 
         $this->dispatcher = new Dispatcher(Route::getRouteMap());
+    }
+
+    public function tearDown()
+    {
+        Route::cleanRouteMap();
     }
 
     public function testSmokeTestForDispatcher()
@@ -43,7 +47,7 @@ class DispatcherTest extends PHPUnit
 
     public function testSmokeTestForAllMethodsOfRouteExecution()
     {
-        $routeExecution = $$this->dispatcher->getExecute();
+        $routeExecution = $this->dispatcher->getExecute();
 
         $this->assertEquals(true, method_exists($routeExecution, 'getRun'), "It should be return true if the getRun method exists");
         $this->assertEquals(true, method_exists($routeExecution, 'getAction'), "It should be return true if the getAction method exists");
@@ -55,7 +59,7 @@ class DispatcherTest extends PHPUnit
 
     public function testRetunsOfGetRunMethod()
     {
-        $routeExecution = $$this->dispatcher->getExecute();
+        $routeExecution = $this->dispatcher->getExecute();
 
         $this->assertEquals('ControllerTest', $routeExecution->getRun(), "It should be return 'ControllerTest' string");
     }
