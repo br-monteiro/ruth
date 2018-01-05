@@ -39,4 +39,25 @@ class DispatcherTest extends PHPUnit
 
         $this->assertInstanceOf(Ruth\Router\RouteExecution::class, $dispatcher->getExecute(), 'It Should be return true if class is even type of Ruth\Router\RouteExecution');
     }
+
+    public function testSmokeTestForAllMethodsOfRouteExecution()
+    {
+        Route::get('/:id', [
+            'run' => 'ControllerTest',
+            'action' => 'testAction',
+            'patterns' => [
+                ':id' => '/\d+/'
+            ]
+        ]);
+
+        $dispatcher = new Dispatcher(Route::getRouteMap());
+        $routeExecution = $dispatcher->getExecute();
+
+        $this->assertEquals(true, method_exists($routeExecution, 'getRun'), "It should be return true if the getRun method exists");
+        $this->assertEquals(true, method_exists($routeExecution, 'getAction'), "It should be return true if the getAction method exists");
+        $this->assertEquals(true, method_exists($routeExecution, 'getParams'), "It should be return true if the getParams method exists");
+        $this->assertEquals(true, method_exists($routeExecution, 'getPatterns'), "It should be return true if the getPatterns method exists");
+        $this->assertEquals(true, method_exists($routeExecution, 'getError'), "It should be return true if the getError method exists");
+        $this->assertEquals(true, method_exists($routeExecution, 'getRawRouteConfig'), "It should be return true if the getRawRouteConfig method exists");
+    }
 }
