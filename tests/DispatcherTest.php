@@ -70,4 +70,11 @@ class DispatcherTest extends PHPUnit
 
         $this->assertEquals('testAction', $routeExecution->getAction(), "It should be return 'testAction' string");
     }
+
+    public function testRetunsOfGetParamsMethod()
+    {
+        $routeExecution = $this->dispatcher->getExecute();
+
+        $this->assertEquals(['id' => 123], $routeExecution->getParams(), "It should be return an array with '['id' => 123]' content");
+    }
 }
