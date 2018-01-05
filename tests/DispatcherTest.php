@@ -7,6 +7,7 @@ use Ruth\Router\Dispatcher;
 
 class DispatcherTest extends PHPUnit
 {
+    protected $dispatcher;
 
     public function tearDown()
     {
@@ -26,6 +27,8 @@ class DispatcherTest extends PHPUnit
                 ':id' => '/\d+/'
             ]
         ]);
+
+        $this->dispatcher = new Dispatcher(Route::getRouteMap());
     }
 
     public function testSmokeTestForDispatcher()
@@ -35,16 +38,12 @@ class DispatcherTest extends PHPUnit
 
     public function testSmokeTestForGetExecuteMethod()
     {
-
-        $dispatcher = new Dispatcher(Route::getRouteMap());
-
-        $this->assertInstanceOf(Ruth\Router\RouteExecution::class, $dispatcher->getExecute(), 'It Should be return true if class is even type of Ruth\Router\RouteExecution');
+        $this->assertInstanceOf(Ruth\Router\RouteExecution::class, $this->dispatcher->getExecute(), 'It Should be return true if class is even type of Ruth\Router\RouteExecution');
     }
 
     public function testSmokeTestForAllMethodsOfRouteExecution()
     {
-        $dispatcher = new Dispatcher(Route::getRouteMap());
-        $routeExecution = $dispatcher->getExecute();
+        $routeExecution = $$this->dispatcher->getExecute();
 
         $this->assertEquals(true, method_exists($routeExecution, 'getRun'), "It should be return true if the getRun method exists");
         $this->assertEquals(true, method_exists($routeExecution, 'getAction'), "It should be return true if the getAction method exists");
@@ -56,16 +55,14 @@ class DispatcherTest extends PHPUnit
 
     public function testRetunsOfGetRunMethod()
     {
-        $dispatcher = new Dispatcher(Route::getRouteMap());
-        $routeExecution = $dispatcher->getExecute();
+        $routeExecution = $$this->dispatcher->getExecute();
 
         $this->assertEquals('ControllerTest', $routeExecution->getRun(), "It should be return 'ControllerTest' string");
     }
 
     public function testRetunsOfGetActionMethod()
     {
-        $dispatcher = new Dispatcher(Route::getRouteMap());
-        $routeExecution = $dispatcher->getExecute();
+        $routeExecution = $this->dispatcher->getExecute();
 
         $this->assertEquals('testAction', $routeExecution->getAction(), "It should be return 'testAction' string");
     }
