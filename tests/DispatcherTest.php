@@ -36,8 +36,7 @@ class DispatcherTest extends PHPUnit
         ]);
 
         $dispatcher = new Dispatcher(Route::getRouteMap());
-        $expected = is_a($dispatcher->getExecute(), Ruth\Router\RouteExecution::class);
 
-        $this->assertEquals(true, $expected, 'It Should be return true if class is even type of Ruth\Router\RouteExecution');
+        $this->assertInstanceOf(Ruth\Router\RouteExecution::class, $dispatcher->getExecute(), 'It Should be return true if class is even type of Ruth\Router\RouteExecution');
     }
 }
