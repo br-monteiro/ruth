@@ -10,14 +10,14 @@ class DispatcherTest extends PHPUnit
 
     public function tearDown()
     {
-        Route::cleanRouteMap();
-
         $request = [
             'REQUEST_METHOD' => 'GET',
             'REQUEST_URI' => '/123'
         ];
 
         $_SERVER = array_merge($_SERVER, $request);
+
+        Route::cleanRouteMap();
 
         Route::get('/:id', [
             'run' => 'ControllerTest',
