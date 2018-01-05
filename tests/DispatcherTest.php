@@ -84,4 +84,44 @@ class DispatcherTest extends PHPUnit
 
         $this->assertEquals([':id' => '/\d+/'], $routeExecution->getPatterns(), "It should be return an array with '[':id' => '/\d+/']' content");
     }
+
+    public function testRetunsOfGetErrorMethod()
+    {
+        $routeExecution = $this->dispatcher->getExecute();
+
+        $this->assertEquals(null, $routeExecution->getError(), "It should be return null");
+    }
+
+    public function testRetunsOfGetErrorMethodWhenRouteIsNotMatch()
+    {
+        $request = [
+            'REQUEST_METHOD' => 'GET',
+            'REQUEST_URI' => '/deve-haver-erro'
+        ];
+
+        $expectedRawConfig = [
+            "patterns" => [
+                ":id" => "/\d+/"
+            ],
+            "explode" => [
+                0 => "",
+                1 => ":id"
+            ],
+            "type" => "GET",
+            "error" => "route not found"
+        ];
+
+        $_SERVER = array_merge($_SERVER, $request);
+
+        $dispatcher = new Dispatcher(Route::getRouteMap());
+        $routeExecution = $dispatcher->getExecute();
+
+        $this->assertEquals(null, $routeExecution->getRun(), "It should be return null when route is fail");
+        $this->assertEquals(null, $routeExecution->getAction(), "It should be return null when route is fail");
+        $this->assertEquals(null, $routeExecution->getParams(), "It should be return null when route is fail");
+        $this->assertEquals($expectedRawConfig['patterns'], $routeExecution->getPatterns(), "It should be return '[':id' => '/\d+/']' when route is fail");
+        $this->assertEquals($expectedRawConfig, $routeExecution->getRawRouteConfig(), "It should be return an equal array");
+
+        $this->assertEquals('route not found', $routeExecution->getError(), "It should be return 'route not found' string");
+    }
 }
