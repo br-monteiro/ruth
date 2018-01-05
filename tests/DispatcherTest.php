@@ -76,4 +76,20 @@ class DispatcherTest extends PHPUnit
 
         $this->assertEquals('ControllerTest', $routeExecution->getRun(), "It should be return 'ControllerTest' string");
     }
+
+    public function testRetunsOfGetActionMethod()
+    {
+        Route::get('/:id', [
+            'run' => 'ControllerTest',
+            'action' => 'testAction',
+            'patterns' => [
+                ':id' => '/\d+/'
+            ]
+        ]);
+
+        $dispatcher = new Dispatcher(Route::getRouteMap());
+        $routeExecution = $dispatcher->getExecute();
+
+        $this->assertEquals('testAction', $routeExecution->getAction(), "It should be return 'testAction' string");
+    }
 }
