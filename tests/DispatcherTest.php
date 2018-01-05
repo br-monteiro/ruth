@@ -60,4 +60,20 @@ class DispatcherTest extends PHPUnit
         $this->assertEquals(true, method_exists($routeExecution, 'getError'), "It should be return true if the getError method exists");
         $this->assertEquals(true, method_exists($routeExecution, 'getRawRouteConfig'), "It should be return true if the getRawRouteConfig method exists");
     }
+
+    public function testRetunsOfGetRunMethod()
+    {
+        Route::get('/:id', [
+            'run' => 'ControllerTest',
+            'action' => 'testAction',
+            'patterns' => [
+                ':id' => '/\d+/'
+            ]
+        ]);
+
+        $dispatcher = new Dispatcher(Route::getRouteMap());
+        $routeExecution = $dispatcher->getExecute();
+
+        $this->assertEquals('ControllerTest', $routeExecution->getRun(), "It should be return 'ControllerTest' string");
+    }
 }
