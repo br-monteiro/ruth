@@ -124,4 +124,27 @@ class DispatcherTest extends PHPUnit
 
         $this->assertEquals('route not found', $routeExecution->getError(), "It should be return 'route not found' string");
     }
+
+    public function testRetunsOfGetRawRouteConfigMethod()
+    {
+        $expectedRawRouteExecution = [
+            'run' => 'ControllerTest',
+            'action' => 'testAction',
+            'patterns' => [
+                ':id' => '/\d+/',
+            ],
+            'explode' => [
+                0 => '',
+                1 => ':id',
+            ],
+            'type' => 'GET',
+            'params' => [
+                'id' => '123',
+            ],
+        ];
+
+        $routeExecution = $this->dispatcher->getExecute();
+
+        $this->assertEquals($expectedRawRouteExecution, $routeExecution->getRawRouteConfig(), "It should be return an equal array");
+    }
 }
