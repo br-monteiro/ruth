@@ -21,8 +21,19 @@ class Dispatcher
 
     private function config(): Dispatcher
     {
-        $this->method = strtoupper(filter_input(INPUT_SERVER, 'REQUEST_METHOD'));
-        $this->uri = Route::normalizeRoute(filter_input(INPUT_SERVER, 'REQUEST_URI'));
+        $requestMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
+        $requestUri = filter_input(INPUT_SERVER, 'REQUEST_URI');
+
+        if (isset($_SERVER['REQUEST_METHOD']) && !$requestMethod) {
+            $requestMethod = $_SERVER['REQUEST_METHOD'];
+        }
+        if (isset($_SERVER['REQUEST_URI']) && !$requestUri) {
+            $requestUri = $_SERVER['REQUEST_URI'];
+        }
+
+        $this->method = strtoupper($requestMethod);
+        $this->uri = Route::normalizeRoute($requestUri);
+
         return $this;
     }
 
