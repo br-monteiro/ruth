@@ -18,6 +18,14 @@ class DispatcherTest extends PHPUnit
         ];
 
         $_SERVER = array_merge($_SERVER, $request);
+
+        Route::get('/:id', [
+            'run' => 'ControllerTest',
+            'action' => 'testAction',
+            'patterns' => [
+                ':id' => '/\d+/'
+            ]
+        ]);
     }
 
     public function testSmokeTestForDispatcher()
@@ -27,13 +35,6 @@ class DispatcherTest extends PHPUnit
 
     public function testSmokeTestForGetExecuteMethod()
     {
-        Route::get('/:id', [
-            'run' => 'ControllerTest',
-            'action' => 'testAction',
-            'patterns' => [
-                ':id' => '/\d+/'
-            ]
-        ]);
 
         $dispatcher = new Dispatcher(Route::getRouteMap());
 
@@ -42,14 +43,6 @@ class DispatcherTest extends PHPUnit
 
     public function testSmokeTestForAllMethodsOfRouteExecution()
     {
-        Route::get('/:id', [
-            'run' => 'ControllerTest',
-            'action' => 'testAction',
-            'patterns' => [
-                ':id' => '/\d+/'
-            ]
-        ]);
-
         $dispatcher = new Dispatcher(Route::getRouteMap());
         $routeExecution = $dispatcher->getExecute();
 
@@ -63,14 +56,6 @@ class DispatcherTest extends PHPUnit
 
     public function testRetunsOfGetRunMethod()
     {
-        Route::get('/:id', [
-            'run' => 'ControllerTest',
-            'action' => 'testAction',
-            'patterns' => [
-                ':id' => '/\d+/'
-            ]
-        ]);
-
         $dispatcher = new Dispatcher(Route::getRouteMap());
         $routeExecution = $dispatcher->getExecute();
 
@@ -79,14 +64,6 @@ class DispatcherTest extends PHPUnit
 
     public function testRetunsOfGetActionMethod()
     {
-        Route::get('/:id', [
-            'run' => 'ControllerTest',
-            'action' => 'testAction',
-            'patterns' => [
-                ':id' => '/\d+/'
-            ]
-        ]);
-
         $dispatcher = new Dispatcher(Route::getRouteMap());
         $routeExecution = $dispatcher->getExecute();
 
