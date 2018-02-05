@@ -3,7 +3,7 @@
     "description": "A simple route system in PHP",
     "homepage": "https://github.com/br-monteiro/ruth",
     "type": "library",
-    "license": "GNU",
+    "license": "MIT",
     "minimum-stability": "stable",
     "authors": [
         {
