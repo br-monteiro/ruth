@@ -4,6 +4,7 @@ namespace Ruth\Router;
 class RouteExecution
 {
 
+    private $route;
     private $run;
     private $action;
     private $params = [];
@@ -18,6 +19,7 @@ class RouteExecution
 
     private function config($route)
     {
+        $this->route = $route['route'] ?? null;
         $this->run = $route['run'] ?? null;
         $this->action = $route['action'] ?? null;
         $this->params = $route['params'] ?? null;
@@ -45,14 +47,19 @@ class RouteExecution
     {
         return $this->patterns;
     }
-    
+
     public function getError()
     {
         return $this->error;
     }
-    
+
     public function getRawRouteConfig()
     {
         return $this->rawRouteConfig;
+    }
+
+    public function getRoute()
+    {
+        return $this->route;
     }
 }

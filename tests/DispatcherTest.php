@@ -128,6 +128,7 @@ class DispatcherTest extends PHPUnit
     public function testRetunsOfGetRawRouteConfigMethod()
     {
         $expectedRawRouteExecution = [
+            'route' => '/:id',
             'run' => 'ControllerTest',
             'action' => 'testAction',
             'patterns' => [
